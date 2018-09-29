@@ -19,4 +19,34 @@ allprojects {
         jcenter()
         google()
     }
+
+    task serverStart(dependsOn: ":backend:appengineStart"){
+        doLast{
+            println "Server Started"
+        }
+    }
+
+    task runTests(dependsOn: ":app:connectedAndroidTest"){
+
+        doLast{
+            println "running Tests Done"
+        }
+    }
+
+    task stopServer(dependsOn: ":backend:appengineStop"){
+        doLast{
+            println "server stopped"
+        }
+    }
+
+    task customTaskForTests{
+        dependsOn "serverStart"
+        dependsOn "runTests"
+        mustRunAfter "serverStart"
+        doLast{
+            println "custom task ran successfully"
+        }
+        finalizedBy "stopServer"
+
+    }
 }

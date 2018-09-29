@@ -26,7 +26,7 @@ import org.junit.runner.RunWith;
 @LargeTest
 
 public class EndpointsAsyncTaskTest extends AndroidTestCase{
-    String TAG = EndpointsAsyncTask.class.getSimpleName();
+
    @Rule
     public ActivityTestRule<MainActivity> mActivityRule =
             new ActivityTestRule(MainActivity.class);
@@ -44,7 +44,6 @@ public class EndpointsAsyncTaskTest extends AndroidTestCase{
 
     @Test
     public void testVerifyResponse() {
-
         onView(withId(R.id.joke_btn)).perform(click());
         onView(withId(R.id.joke_tv)).check(matches(isDisplayed()));
     }
