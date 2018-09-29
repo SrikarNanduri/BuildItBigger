@@ -31,7 +31,7 @@ public class JokeDisplayActivity extends AppCompatActivity {
                     jokePB.setVisibility(View.GONE);
                     JokeTV.setText(joke);
                 }
-            }, 3000);
+            }, 1000);
 
         } else {
             String errorMsg= "No Joke Available at the momemt";
