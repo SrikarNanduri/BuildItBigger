@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -25,7 +26,7 @@ public class MainActivityFragment extends Fragment {
     TextView mTextView;
 
    @BindView(R.id.joke_btn)
-    Button joke_btn;
+   ImageButton joke_btn;
 
     public MainActivityFragment() {
     }
@@ -39,7 +40,7 @@ public class MainActivityFragment extends Fragment {
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
 
-        String placeHolderText = "Get your daily dose of jokes and start your day with a laugh";
+        String placeHolderText = "\"Click me\", Get your daily dose of jokes and start your day with a laugh";
         mTextView.setText(placeHolderText);
         return root;
     }
