@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">JokeDisplaylib</string>
+    <string name="error_message">No Joke Available at the momemt</string>
 </resources>

@@ -15,13 +15,14 @@ public class JokeDisplayActivity extends AppCompatActivity {
 
     TextView JokeTV;
     ProgressBar jokePB;
+    String joke;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joke_display);
         Intent intent = getIntent();
-        final String joke = intent.getStringExtra(INTENT_KEY_JOKE);
+        joke = intent.getStringExtra(INTENT_KEY_JOKE);
         JokeTV = findViewById(R.id.joke_tv);
         jokePB = findViewById(R.id.joke_pb);
         jokePB.setVisibility(View.VISIBLE);
@@ -35,7 +36,7 @@ public class JokeDisplayActivity extends AppCompatActivity {
             }, 1000);
 
         } else {
-            String errorMsg= "No Joke Available at the momemt";
+            String errorMsg= getResources().getString(R.string.error_message);
             JokeTV.setText(errorMsg);
         }
     }
