@@ -41,7 +41,7 @@ public class MainActivityFragment extends Fragment {
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
 
-        String placeHolderText = "\"Click me\",Get your daily dose of jokes and start your day with a laugh";
+        String placeHolderText =getResources().getString(R.string.welcome_text);
         mTextView.setText(placeHolderText);
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)

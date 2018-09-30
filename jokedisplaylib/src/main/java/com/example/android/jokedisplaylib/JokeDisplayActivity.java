@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 public class JokeDisplayActivity extends AppCompatActivity {
 
+    public static final String INTENT_KEY_JOKE ="joke";
 
     TextView JokeTV;
     ProgressBar jokePB;
@@ -20,7 +21,7 @@ public class JokeDisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joke_display);
         Intent intent = getIntent();
-        final String joke = intent.getStringExtra("joke");
+        final String joke = intent.getStringExtra(INTENT_KEY_JOKE);
         JokeTV = findViewById(R.id.joke_tv);
         jokePB = findViewById(R.id.joke_pb);
         jokePB.setVisibility(View.VISIBLE);
