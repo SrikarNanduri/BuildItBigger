@@ -12,11 +12,22 @@ import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
     public static MyApi myApiService = null;
     private Context context;
     String text;
+    private TaskCompleteListener mTaskCompleteListener;
+
+    public interface TaskCompleteListener {
+
+        void onTaskComplete(String result);
+    }
+
+    public EndpointsAsyncTask(TaskCompleteListener listener) {
+        mTaskCompleteListener = listener;
+    }
 
 
     @Override
@@ -51,8 +62,9 @@ public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        final Intent intent = new Intent(context, JokeDisplayActivity.class);
+        mTaskCompleteListener.onTaskComplete(result);
+        /*final Intent intent = new Intent(context, JokeDisplayActivity.class);
         intent.putExtra(JokeDisplayActivity.INTENT_KEY_JOKE,result);
-        context.startActivity(intent);
+        context.startActivity(intent);*/
     }
 }
