@@ -29,6 +29,7 @@
             android:configChanges="orientation|screenSize">
 
         </activity>
+        <!--Include the AdActivity configChanges and theme. -->
     </application>
 
 </manifest>
