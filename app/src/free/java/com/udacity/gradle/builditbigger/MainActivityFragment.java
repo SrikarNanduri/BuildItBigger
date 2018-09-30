@@ -4,18 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.util.Pair;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.jokedisplaylib.JokeDisplayActivity;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,7 +27,7 @@ import butterknife.ButterKnife;
  */
 public class MainActivityFragment extends Fragment {
 
-
+    private static final String TAG = EndpointsAsyncTask.class.getSimpleName();
    @BindView(R.id.instructions_text_view)
     TextView mTextView;
 
@@ -34,6 +35,7 @@ public class MainActivityFragment extends Fragment {
    ImageButton joke_btn;
 
     private Context mContext;
+    private InterstitialAd mInterstitialAd;
 
     public MainActivityFragment() {
     }
@@ -54,6 +56,10 @@ public class MainActivityFragment extends Fragment {
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
 
+        mInterstitialAd = new InterstitialAd(mContext);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
         String placeHolderText =getResources().getString(R.string.welcome_text);
         mTextView.setText(placeHolderText);
         AdRequest adRequest = new AdRequest.Builder()
@@ -64,6 +70,20 @@ public class MainActivityFragment extends Fragment {
         joke_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+                    Log.e(TAG, getString(R.string.error));
+                }
+            }
+        });
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                InterstitialAd();
                 tellJoke();
             }
         });
@@ -87,6 +107,9 @@ public class MainActivityFragment extends Fragment {
         }).execute(mContext);
     }
 
+    private void InterstitialAd() {
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+    }
 
 
 }
