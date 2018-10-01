@@ -24,11 +24,11 @@ import org.junit.runner.RunWith;
 @LargeTest
 
 public class EndpointsAsyncTaskTest extends AndroidTestCase{
+    private static final String ERROR = "There was an error fetching the joke from the server";
 
    @Rule
     public ActivityTestRule<MainActivity> mActivityRule =
             new ActivityTestRule(MainActivity.class);
-
 
 
    @Test
@@ -39,9 +39,14 @@ public class EndpointsAsyncTaskTest extends AndroidTestCase{
            public void onTaskComplete(String result) {
            }
        });
+       try {
        testHelper.execute(InstrumentationRegistry.getContext());
-       String joke = testHelper.get(5, TimeUnit.SECONDS);
-       Assert.assertTrue(!joke.equals(""));
+       String joke = testHelper.get();
+       assertNotNull(joke);
+       assertTrue(!joke.isEmpty());
+       } catch (InterruptedException ie) {
+           fail(ERROR);
+       }
    }
 
     @Test
